@@ -1,15 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        // Make sure JDK is configured in Jenkins (Manage Jenkins → Global Tool Configuration)
-        jdk 'jdk17'   // or your configured JDK name (e.g. "Java-11" or "Java-21")
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                // Clone public GitHub repository
                 git branch: 'master',
                     url: 'https://github.com/ateeqhonyal321/-Demo'
             }
@@ -17,39 +11,25 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo '🧱 Building Java source files...'
-                sh 'javac *.java'
+                echo '🧱 Compiling Java source...'
+                sh 'javac Hello.java'
             }
         }
 
-        stage('Test') {
+        stage('Run') {
             steps {
-                echo '🧪 Running Java tests or main class...'
-                // Replace 'Hello' with your main class name
+                echo '▶️ Running Java program...'
                 sh 'java Hello'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                echo '📦 Packaging compiled classes into a JAR...'
-                sh 'jar -cvf myapp.jar *.class'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo '🚀 Deploying application (placeholder stage)...'
             }
         }
     }
 
     post {
         success {
-            echo '✅ Build completed successfully!'
+            echo '✅ Build succeeded!'
         }
         failure {
-            echo '❌ Build failed — check logs for details.'
+            echo '❌ Build failed.'
         }
     }
 }
