@@ -1,24 +1,24 @@
-pipeline{
-    agebt any
+pipeline {
+    agent any
 
-    stages{
-        stage('Checkout'){
-          steps{
-              git branch:'master',url 'https://github.com/ateeqhonyal321/Demo'
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'master', url: 'https://github.com/ateeqhonyal321/Demo'
             }
         }
 
-        stage('Build'){
-            steps{
-                  echo "Building.."
+        stage('Build') {
+            steps {
+                echo "Building.."
             }
-      }
+        }
 
-        stage('Test'){
-            steps{
-                  echo "Testing.."
-                }
-              }
-          }
+        stage('Test') {
+            steps {
+                echo "Testing.."
+            }
+        }
     }
-          
+}
+
